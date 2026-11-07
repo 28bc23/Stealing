@@ -4,6 +4,8 @@ public interface IPlayerBody
 {
     public IPlayerComponent PlayerComponent { get; }
     public CapsuleCollider CapsuleCollider { get; }
+    public Transform CameraTransform { get; }
+    public Transform Orientation { get; }
 }
 
 
@@ -12,33 +14,22 @@ public class PlayerBodyComponent : MonoBehaviour, IPlayerComponent, IPlayerBody
 {
     Player player;
 
-    [field: SerializeField, HideInInspector]
+    [field: SerializeField]
     public CapsuleCollider CapsuleCollider { get; private set; }
+    [field: SerializeField]
+    public Transform CameraTransform { get; private set; }
+    [field: SerializeField]
+    public Transform Orientation { get; private set; }
 
     public IPlayerComponent PlayerComponent => this;
-
-    private void Reset()
-    {
-        CapsuleCollider = GetComponent<CapsuleCollider>();
-
-        if (CapsuleCollider != null)
-        {
-            CapsuleCollider.height = 2.0f;
-            CapsuleCollider.radius = 0.5f;
-            CapsuleCollider.center = new Vector3(0, 0, 0);
-        }
-    }
 
     public void Init(Player player)
     {
         this.player = player;
 
-        if (CapsuleCollider == null)
-        {
-            CapsuleCollider = GetComponent<CapsuleCollider>();
-        }
-
         Debug.Assert(CapsuleCollider != null, "you fucked up (player dont have collider)");
+        Debug.Assert(CameraTransform != null, "you fucked up (player dont have CameraTransform)");
+        Debug.Assert(Orientation != null, "you fucked up (player dont have Orientation)");
     }
 
     // Update is called once per frame
