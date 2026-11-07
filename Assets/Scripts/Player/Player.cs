@@ -7,8 +7,13 @@ public class Player : MonoBehaviour
 
     public IPlayerBody PlayerBody { get; private set; }
 
+    public IInputReader InputReader { get; private set; }
+
     void Awake()
     {
+        InputReader = new InputReader();
+
+
         PlayerBody = GetComponent<PlayerBodyComponent>();
         if (PlayerBody == null)
         {
