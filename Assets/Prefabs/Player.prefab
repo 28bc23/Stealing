@@ -147,8 +147,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4583614886197180220}
   - component: {fileID: 3162735918846612051}
+  - component: {fileID: 7693060202952396432}
   - component: {fileID: 7805537385771027460}
-  - component: {fileID: 2222620172744128199}
+  - component: {fileID: 4799519553589226351}
+  - component: {fileID: 1720887824403760825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -196,6 +198,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7693060202952396432
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004324032166714026}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!114 &7805537385771027460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +240,20 @@ MonoBehaviour:
   <CapsuleCollider>k__BackingField: {fileID: 3162735918846612051}
   <CameraTransform>k__BackingField: {fileID: 1506050858457234643}
   <Orientation>k__BackingField: {fileID: 3678747934283107586}
---- !u!114 &2222620172744128199
+--- !u!114 &4799519553589226351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004324032166714026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c0250fbb1a7c3408dde15954d19ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFPSMovementComponent
+  speedMultuplayer: 10
+--- !u!114 &1720887824403760825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

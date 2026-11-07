@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public interface IPlayerBody
+public interface IPlayerBody : IPlayerComponent
 {
-    public IPlayerComponent PlayerComponent { get; }
     public CapsuleCollider CapsuleCollider { get; }
     public Transform CameraTransform { get; }
     public Transform Orientation { get; }
@@ -10,7 +9,7 @@ public interface IPlayerBody
 
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class PlayerBodyComponent : MonoBehaviour, IPlayerComponent, IPlayerBody
+public class PlayerBodyComponent : MonoBehaviour, IPlayerBody
 {
     Player player;
 

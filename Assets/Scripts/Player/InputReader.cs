@@ -14,9 +14,17 @@ public class InputReader : IInputReader
         SubscribeAll();
     }
 
+    public void EnablePlayer() => inputActions.Player.Enable();
+    public void DisablePlayer() => inputActions.Player.Disable();
+
+    public void EnableUI() => inputActions.UI.Enable();
+    public void DisableUI() => inputActions.UI.Disable();
+
     void SubscribeAll()
     {
         inputActions.Player.Move.performed += OnMoveHandle;
+        inputActions.Player.Move.canceled += OnMoveHandle;
+
     }
 
     void UnsubscribeAll()
@@ -33,4 +41,10 @@ public class InputReader : IInputReader
 public interface IInputReader
 {
     public Vector2 MoveDelta { get; }
+
+    public void EnablePlayer();
+    public void DisablePlayer();
+
+    public void EnableUI();
+    public void DisableUI();
 }
