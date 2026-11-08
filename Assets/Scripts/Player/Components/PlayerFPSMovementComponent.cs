@@ -54,7 +54,7 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
         player.PlayerBody.CameraTransform.localRotation = Quaternion.Euler(cameraX, cameraY, 0);
 
-
+        player.PlayerBody.Orientation.localRotation = Quaternion.Euler(0, cameraY, 0);
         #endregion
 
         #region Movement

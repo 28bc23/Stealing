@@ -253,6 +253,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFPSMovementComponent
   speedMultuplayer: 10
+  walkSpeedLimit: 2
+  sprintSpeedLimit: 5
+  sensitivityX: 0.2
+  sensitivityY: 0.2
+  maxXAngle: 90
+  minXAngle: -90
 --- !u!114 &1720887824403760825
 MonoBehaviour:
   m_ObjectHideFlags: 0
