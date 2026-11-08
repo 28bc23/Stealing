@@ -10,6 +10,8 @@ public class InputReader : IInputReader
 
     public bool IsSprinting { get; private set; }
 
+    public Vector2 CursorDelta { get; private set; }
+
     public InputReader()
     {
         inputActions = new InputSystem_Actions();
@@ -30,11 +32,8 @@ public class InputReader : IInputReader
         inputActions.Player.Sprint.performed += OnSprintHandle;
         inputActions.Player.Sprint.canceled += OnSprintHandle;
 
-    }
-
-    private void OnSprintHandle(InputAction.CallbackContext context)
-    {
-        IsSprinting = context.ReadValueAsButton();
+        inputActions.Player.Look.performed += OnLookHandle;
+        inputActions.Player.Look.canceled += OnLookHandle;
     }
 
     void UnsubscribeAll()
@@ -44,17 +43,21 @@ public class InputReader : IInputReader
 
         inputActions.Player.Sprint.performed -= OnSprintHandle;
         inputActions.Player.Sprint.canceled -= OnSprintHandle;
+
+
+        inputActions.Player.Look.performed -= OnLookHandle;
+        inputActions.Player.Look.canceled -= OnLookHandle;
     }
 
-    void OnMoveHandle(InputAction.CallbackContext context)
-    {
-        MoveDelta = context.ReadValue<Vector2>();
-    }
+    private void OnLookHandle(InputAction.CallbackContext context) => CursorDelta = context.ReadValue<Vector2>();
+    private void OnSprintHandle(InputAction.CallbackContext context) => IsSprinting = context.ReadValueAsButton();
+    void OnMoveHandle(InputAction.CallbackContext context) => MoveDelta = context.ReadValue<Vector2>();
 }
 
 public interface IInputReader
 {
     public Vector2 MoveDelta { get; }
+    public Vector2 CursorDelta { get; }
     public bool IsSprinting { get; }
 
     public void EnablePlayer();

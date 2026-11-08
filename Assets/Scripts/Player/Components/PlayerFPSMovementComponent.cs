@@ -11,14 +11,29 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
     Player player;
     Rigidbody rb;
 
+    [Header("Movement")]
     [SerializeField]
-    float speedMultuplayer = 10;
+    float speedMultuplayer = 10.0f;
     [SerializeField]
-    float walkSpeedLimit = 2;
+    float walkSpeedLimit = 2.0f;
     [SerializeField]
-    float sprintSpeedLimit = 5;
+    float sprintSpeedLimit = 5.0f;
+
+    [Header("Camera")]
+
+    [SerializeField]
+    float sensitivityX = 0.2f;
+    [SerializeField]
+    float sensitivityY = 0.2f;
+    [SerializeField]
+    float maxXAngle = 90;
+    [SerializeField]
+    float minXAngle = -90;
 
     public IPlayerComponent PlayerComponent => this;
+
+    float cameraX;
+    float cameraY;
 
     public void Init(Player player)
     {
@@ -27,9 +42,22 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         rb = GetComponent<Rigidbody>();
         Debug.Assert(rb != null, "you fucked up (player dont have Rigidbody)");
     }
-
+  
     void FixedUpdate()
     {
+        #region Camera
+
+        cameraX -= player.InputReader.CursorDelta.y * sensitivityY;
+        cameraY += player.InputReader.CursorDelta.x * sensitivityX;
+
+        cameraX = Mathf.Clamp(cameraX, minXAngle, maxXAngle);
+
+        player.PlayerBody.CameraTransform.localRotation = Quaternion.Euler(cameraX, cameraY, 0);
+
+
+        #endregion
+
+        #region Movement
         if (player.InputReader.MoveDelta == Vector2.zero)
         {
             rb.linearVelocity = Vector3.zero;
@@ -53,7 +81,6 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
             rb.linearVelocity = limitedVelocity;
         }
-
-        Debug.Log(velocity.magnitude);
+        #endregion
     }
 }

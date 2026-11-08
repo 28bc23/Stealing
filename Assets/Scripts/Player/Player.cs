@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         InputReader = new InputReader();
         InputReader.EnablePlayer();
         InputReader.DisableUI();
