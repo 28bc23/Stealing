@@ -13,6 +13,10 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
     [SerializeField]
     float speedMultuplayer = 10;
+    [SerializeField]
+    float walkSpeedLimit = 2;
+    [SerializeField]
+    float sprintSpeedLimit = 5;
 
     public IPlayerComponent PlayerComponent => this;
 
@@ -35,6 +39,21 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         Vector3 moveForce = (player.PlayerBody.Orientation.forward * player.InputReader.MoveDelta.y + player.PlayerBody.Orientation.right * player.InputReader.MoveDelta.x) * speedMultuplayer;
         rb.AddForce(moveForce);
 
-        //TODO: ADD speed limiter
+        float limiter = walkSpeedLimit;
+
+        if (player.InputReader.IsSprinting) limiter = sprintSpeedLimit;
+
+        Vector3 velocity = rb.linearVelocity;
+        Vector3 flatVelocity = new Vector3(velocity.x, 0, velocity.z);
+
+        if(flatVelocity.magnitude > limiter)
+        {
+            Vector3 limitedFlatVelocity = flatVelocity.normalized * limiter;
+            Vector3 limitedVelocity = new Vector3(limitedFlatVelocity.x, velocity.y, limitedFlatVelocity.z);
+
+            rb.linearVelocity = limitedVelocity;
+        }
+
+        Debug.Log(velocity.magnitude);
     }
 }

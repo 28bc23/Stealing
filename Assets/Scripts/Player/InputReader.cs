@@ -8,6 +8,8 @@ public class InputReader : IInputReader
 
     public Vector2 MoveDelta {  get; private set; }
 
+    public bool IsSprinting { get; private set; }
+
     public InputReader()
     {
         inputActions = new InputSystem_Actions();
@@ -25,11 +27,23 @@ public class InputReader : IInputReader
         inputActions.Player.Move.performed += OnMoveHandle;
         inputActions.Player.Move.canceled += OnMoveHandle;
 
+        inputActions.Player.Sprint.performed += OnSprintHandle;
+        inputActions.Player.Sprint.canceled += OnSprintHandle;
+
+    }
+
+    private void OnSprintHandle(InputAction.CallbackContext context)
+    {
+        IsSprinting = context.ReadValueAsButton();
     }
 
     void UnsubscribeAll()
     {
         inputActions.Player.Move.performed -= OnMoveHandle;
+        inputActions.Player.Move.canceled -= OnMoveHandle;
+
+        inputActions.Player.Sprint.performed -= OnSprintHandle;
+        inputActions.Player.Sprint.canceled -= OnSprintHandle;
     }
 
     void OnMoveHandle(InputAction.CallbackContext context)
@@ -41,6 +55,7 @@ public class InputReader : IInputReader
 public interface IInputReader
 {
     public Vector2 MoveDelta { get; }
+    public bool IsSprinting { get; }
 
     public void EnablePlayer();
     public void DisablePlayer();
