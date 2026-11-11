@@ -1096,6 +1096,77 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""DialogUI"",
+            ""id"": ""68f36cea-cc1f-4e0e-9b9b-5bb5bdab647b"",
+            ""actions"": [
+                {
+                    ""name"": ""next"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cd962ee-25a9-4e30-be13-ce4317beb482"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
+                    ""name"": ""optionUP"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2d0ee4e-e491-466a-a223-0d5f3476952b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
+                    ""name"": ""optionDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""07ca4d85-e38d-4796-87c1-cead66d3e46e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c5d2be26-90b2-4870-b1e3-edc982c529e7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a18c315-c84f-46a9-ac55-9e32eefc2fad"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""optionUP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93803e5a-682c-4cf6-a2b0-ce0f83cdc448"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""optionDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1184,12 +1255,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // DialogUI
+        m_DialogUI = asset.FindActionMap("DialogUI", throwIfNotFound: true);
+        m_DialogUI_next = m_DialogUI.FindAction("next", throwIfNotFound: true);
+        m_DialogUI_optionUP = m_DialogUI.FindAction("optionUP", throwIfNotFound: true);
+        m_DialogUI_optionDown = m_DialogUI.FindAction("optionDown", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_DialogUI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.DialogUI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1640,6 +1717,124 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
+
+    // DialogUI
+    private readonly InputActionMap m_DialogUI;
+    private List<IDialogUIActions> m_DialogUIActionsCallbackInterfaces = new List<IDialogUIActions>();
+    private readonly InputAction m_DialogUI_next;
+    private readonly InputAction m_DialogUI_optionUP;
+    private readonly InputAction m_DialogUI_optionDown;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "DialogUI".
+    /// </summary>
+    public struct DialogUIActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public DialogUIActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "DialogUI/next".
+        /// </summary>
+        public InputAction @next => m_Wrapper.m_DialogUI_next;
+        /// <summary>
+        /// Provides access to the underlying input action "DialogUI/optionUP".
+        /// </summary>
+        public InputAction @optionUP => m_Wrapper.m_DialogUI_optionUP;
+        /// <summary>
+        /// Provides access to the underlying input action "DialogUI/optionDown".
+        /// </summary>
+        public InputAction @optionDown => m_Wrapper.m_DialogUI_optionDown;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_DialogUI; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="DialogUIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(DialogUIActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="DialogUIActions" />
+        public void AddCallbacks(IDialogUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DialogUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogUIActionsCallbackInterfaces.Add(instance);
+            @next.started += instance.OnNext;
+            @next.performed += instance.OnNext;
+            @next.canceled += instance.OnNext;
+            @optionUP.started += instance.OnOptionUP;
+            @optionUP.performed += instance.OnOptionUP;
+            @optionUP.canceled += instance.OnOptionUP;
+            @optionDown.started += instance.OnOptionDown;
+            @optionDown.performed += instance.OnOptionDown;
+            @optionDown.canceled += instance.OnOptionDown;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="DialogUIActions" />
+        private void UnregisterCallbacks(IDialogUIActions instance)
+        {
+            @next.started -= instance.OnNext;
+            @next.performed -= instance.OnNext;
+            @next.canceled -= instance.OnNext;
+            @optionUP.started -= instance.OnOptionUP;
+            @optionUP.performed -= instance.OnOptionUP;
+            @optionUP.canceled -= instance.OnOptionUP;
+            @optionDown.started -= instance.OnOptionDown;
+            @optionDown.performed -= instance.OnOptionDown;
+            @optionDown.canceled -= instance.OnOptionDown;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DialogUIActions.UnregisterCallbacks(IDialogUIActions)" />.
+        /// </summary>
+        /// <seealso cref="DialogUIActions.UnregisterCallbacks(IDialogUIActions)" />
+        public void RemoveCallbacks(IDialogUIActions instance)
+        {
+            if (m_Wrapper.m_DialogUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="DialogUIActions.AddCallbacks(IDialogUIActions)" />
+        /// <seealso cref="DialogUIActions.RemoveCallbacks(IDialogUIActions)" />
+        /// <seealso cref="DialogUIActions.UnregisterCallbacks(IDialogUIActions)" />
+        public void SetCallbacks(IDialogUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DialogUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DialogUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="DialogUIActions" /> instance referencing this action map.
+    /// </summary>
+    public DialogUIActions @DialogUI => new DialogUIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1853,5 +2048,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "DialogUI" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="DialogUIActions.AddCallbacks(IDialogUIActions)" />
+    /// <seealso cref="DialogUIActions.RemoveCallbacks(IDialogUIActions)" />
+    public interface IDialogUIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "next" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "optionUP" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOptionUP(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "optionDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOptionDown(InputAction.CallbackContext context);
     }
 }
