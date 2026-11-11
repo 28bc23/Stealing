@@ -5,8 +5,8 @@ using System;
 [CreateAssetMenu(fileName = "DialogData", menuName = "DialogSystem")]
 public class DialogData : ScriptableObject
 {
-    public List<Message> Messages = new();
-    public List<string> Oprions = new();
+    public Message Message = new("null", "null");
+    public List<string> Options = new();
 }
 
 [Serializable]

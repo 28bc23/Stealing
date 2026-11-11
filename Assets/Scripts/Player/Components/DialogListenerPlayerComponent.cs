@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 
 public interface IPlayerDialogListener : IDialogListener, IPlayerComponent { }
@@ -36,15 +37,70 @@ public class DialogListenerPlayerComponent : MonoBehaviour, IPlayerDialogListene
         {
             Destroy(o);
         }
+
+        DialogText.text = string.Empty;
+
+        p.InputReader.OnNextDialogEvent += OnNextDialogEventHandle;
+        p.InputReader.OnOptionUpEvent += OnOptionUpEventHandle;
+        p.InputReader.OnOptionDownEvent += OnOptionDownEventHandle;
     }
 
     public void TriggeredDialog(DialogTrigger instigator)
+    {
+        EnableDialogInput();
+
+        currentDialogTrigger = instigator;
+
+        DialogText.text = $"{instigator.dialog.Message.Speaker}: {instigator.dialog.Message.Text}";
+
+        DialogParent.SetActive(true);
+
+        if(instigator.dialog.Options.Count > 0)
+        {
+            for (int i = 0; i < instigator.dialog.Options.Count; i++)
+            {
+                GameObject option = Instantiate(DialogOptionPrefab);
+                option.transform.SetParent(DialogOptionsParent.transform);
+            }
+
+            DialogOptionsParent.SetActive(true);
+        }
+    }
+
+
+    private void OnOptionDownEventHandle()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnOptionUpEventHandle()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnNextDialogEventHandle()
+    {
+        if (currentDialogTrigger == null) return;
+
+        currentDialogTrigger.NextDialog();
+
+        DisableDialogInput();
+    }
+
+    private void EnableDialogInput()
     {
         p.InputReader.DisablePlayer();
         p.InputReader.DisableUI();
         p.InputReader.EnableDialogUI();
         p.PlayerMovement.StopPlayer();
+    }
 
-        currentDialogTrigger = instigator;
+    private void DisableDialogInput()
+    {
+        p.InputReader.EnablePlayer();
+        p.InputReader.DisableDialogUI();
+
+        DialogParent.SetActive(false);
+        DialogOptionsParent.SetActive(false);
     }
 }

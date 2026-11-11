@@ -21,44 +21,47 @@ public class DialogTrigger : MonoBehaviour
             return;
         }
 
-        if(dialog.Oprions.Count > 0 && dialog.Oprions.Count != nextDialogs.Count)
+        if(dialog.Options.Count > 0 && dialog.Options.Count != nextDialogs.Count)
         {
             Debug.LogWarning($"Dialog trigger ({gameObject.name}) doesnt have same amount of next dialogs as potions, but it can be right if you know what you are doing, idk.");
             return;
         }
+
+        GetComponent<Collider>().isTrigger = true;
     }
 
     public void NextDialog()
     {
-        if (nextDialogs.Count == 0) return;
-
-        nextDialogs[0].gameObject.SetActive(true);
+        if (nextDialogs.Count > 0) nextDialogs[0].gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
     public void NextDialog(int optionIdx)
     {
-        if (optionIdx < 0) return;
-        if (nextDialogs.Count >= (optionIdx+1)) return;
-
-        nextDialogs[optionIdx].gameObject.SetActive(true);
-
-        if (destroyUnselectedOptions)
+        if (optionIdx >= 0)
         {
-            for (int i = 0; i < nextDialogs.Count; i++)
+            if (nextDialogs.Count <= optionIdx)
             {
-                if (i == optionIdx) continue;
+                nextDialogs[optionIdx].gameObject.SetActive(true);
 
-                Destroy(nextDialogs[i].gameObject);
+                if (destroyUnselectedOptions)
+                {
+                    for (int i = 0; i < nextDialogs.Count; i++)
+                    {
+                        if (i == optionIdx) continue;
+
+                        Destroy(nextDialogs[i].gameObject);
+                    }
+                }
             }
         }
 
         Destroy(gameObject);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!gameObject.TryGetComponent(out IDialogListener listener)) return;
+        Debug.Log("sdsds");
+        if (!other.TryGetComponent(out IDialogListener listener)) return;
 
         listener.TriggeredDialog(this);
     }
