@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3727053241489415997}
   - component: {fileID: 6761215488317042874}
+  - component: {fileID: 785465966272796214}
   m_Layer: 0
   m_Name: DialogTrigger
   m_TagString: Untagged
@@ -53,3 +54,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 2.33, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &785465966272796214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236106948302536130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a497ebe34058b745b9e5248f7a7d331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTrigger
+  <dialog>k__BackingField: {fileID: 0}
