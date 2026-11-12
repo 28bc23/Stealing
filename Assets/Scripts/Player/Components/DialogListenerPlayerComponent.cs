@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Linq;
 
 
 public interface IPlayerDialogListener : IDialogListener, IPlayerComponent { }
@@ -10,35 +11,33 @@ public class DialogListenerPlayerComponent : MonoBehaviour, IPlayerDialogListene
     public IPlayerComponent PlayerComponent => this;
 
     [SerializeField]
-    private GameObject DialogParent;
+    private GameObject dialogParent;
     [SerializeField]
-    private GameObject DialogOptionsParent;
+    private GameObject dialogOptionsParent;
     [SerializeField]
-    private GameObject DialogOptionPrefab;
+    private GameObject dialogOptionPrefab;
     [SerializeField]
-    private TMP_Text DialogText;
+    private TMP_Text dialogText;
 
     Player p;
     private DialogTrigger currentDialogTrigger = null;
+    private int currentDialogIdx = 0;
+    private int selectedOption = 0;
 
     public void Init(Player player)
     {
         p = player;
 
-        Debug.Assert(DialogParent != null, "PlayerDialogListener doesnt have Dialog praent asigned");
-        Debug.Assert(DialogOptionsParent != null, "PlayerDialogListener doesnt have DialogOption parent asigned");
-        Debug.Assert(DialogOptionPrefab != null, "PlayerDialogListener doesnt have DialogOption prefab asigned");
-        Debug.Assert(DialogText != null, "PlayerDialogListener doesnt have Dialog text asigned");
+        Debug.Assert(dialogParent != null, "PlayerDialogListener doesnt have Dialog praent asigned");
+        Debug.Assert(dialogOptionsParent != null, "PlayerDialogListener doesnt have DialogOption parent asigned");
+        Debug.Assert(dialogOptionPrefab != null, "PlayerDialogListener doesnt have DialogOption prefab asigned");
+        Debug.Assert(dialogText != null, "PlayerDialogListener doesnt have Dialog text asigned");
+        Debug.Assert(dialogOptionPrefab.TryGetComponent(out IDialogOption o), "Dioalog option prefab doesnt have DialogOption component");
 
-        DialogParent.SetActive(false);
-        DialogOptionsParent.SetActive(false);
+        dialogParent.SetActive(false);
+        dialogOptionsParent.SetActive(false);
 
-        foreach(GameObject o in DialogOptionsParent.transform)
-        {
-            Destroy(o);
-        }
-
-        DialogText.text = string.Empty;
+        dialogText.text = string.Empty;
 
         p.InputReader.OnNextDialogEvent += OnNextDialogEventHandle;
         p.InputReader.OnOptionUpEvent += OnOptionUpEventHandle;
@@ -49,42 +48,84 @@ public class DialogListenerPlayerComponent : MonoBehaviour, IPlayerDialogListene
     {
         EnableDialogInput();
 
+        if (instigator.dialogs.Count <= 0) return;
+
         currentDialogTrigger = instigator;
 
-        DialogText.text = $"{instigator.dialog.Message.Speaker}: {instigator.dialog.Message.Text}";
+        NextDialogText(true);
 
-        DialogParent.SetActive(true);
+        foreach(Transform o in dialogOptionsParent.transform) { Destroy(o.gameObject); }
 
-        if(instigator.dialog.Options.Count > 0)
+        if(instigator.dialogs.LastOrDefault()?.Options.Count > 0)
         {
-            for (int i = 0; i < instigator.dialog.Options.Count; i++)
+            selectedOption = 0;
+            DialogData lastDialog = instigator.dialogs.Last();
+            for (int i = 0; i < lastDialog.Options.Count; i++)
             {
-                GameObject option = Instantiate(DialogOptionPrefab);
-                option.transform.SetParent(DialogOptionsParent.transform);
+                GameObject option = Instantiate(dialogOptionPrefab);
+                option.transform.SetParent(dialogOptionsParent.transform);
+
+                IDialogOption dialogOption = option.GetComponent<IDialogOption>();
+                dialogOption.Text = lastDialog.Options[i];
+                if (i == selectedOption) dialogOption.SetHighlight(true);
             }
 
-            DialogOptionsParent.SetActive(true);
+            if(instigator.dialogs.Count == 1)
+                dialogOptionsParent.SetActive(true);
         }
     }
 
 
     private void OnOptionDownEventHandle()
     {
-        throw new NotImplementedException();
+        if(dialogOptionsParent.transform.childCount == 0 || selectedOption == 0) return;
+
+        dialogOptionsParent.transform.GetChild(selectedOption--).GetComponent<IDialogOption>().SetHighlight(false);
+        dialogOptionsParent.transform.GetChild(selectedOption).GetComponent<IDialogOption>().SetHighlight(true);
     }
 
     private void OnOptionUpEventHandle()
     {
-        throw new NotImplementedException();
+        if (dialogOptionsParent.transform.childCount == 0 || selectedOption == dialogOptionsParent.transform.childCount - 1) return;
+
+        dialogOptionsParent.transform.GetChild(selectedOption++).GetComponent<IDialogOption>().SetHighlight(false);
+        dialogOptionsParent.transform.GetChild(selectedOption).GetComponent<IDialogOption>().SetHighlight(true);
     }
 
     private void OnNextDialogEventHandle()
     {
         if (currentDialogTrigger == null) return;
 
-        currentDialogTrigger.NextDialog();
+        if(currentDialogIdx >= currentDialogTrigger.dialogs.Count-1)
+        {
+            if (dialogOptionsParent.transform.childCount > 0) currentDialogTrigger.NextDialog(selectedOption);
+            else currentDialogTrigger.NextDialog();
 
-        DisableDialogInput();
+            DisableDialogInput();
+
+            selectedOption = 0;
+            return;
+        }
+
+        NextDialogText();
+
+        if(currentDialogIdx == currentDialogTrigger.dialogs.Count - 1 && dialogOptionsParent.transform.childCount > 0)
+        {
+            dialogOptionsParent.SetActive(true);
+        }
+    }
+
+    void NextDialogText(bool start = false)
+    {
+        if (start)
+        {
+            currentDialogIdx = 0;
+            dialogText.text = $"{currentDialogTrigger.dialogs[currentDialogIdx].Message.Speaker}: {currentDialogTrigger.dialogs[currentDialogIdx].Message.Text}";
+            dialogParent.SetActive(true);
+            return;
+        }
+
+        dialogText.text = $"{currentDialogTrigger.dialogs[++currentDialogIdx].Message.Speaker}: {currentDialogTrigger.dialogs[currentDialogIdx].Message.Text}";
     }
 
     private void EnableDialogInput()
@@ -100,7 +141,7 @@ public class DialogListenerPlayerComponent : MonoBehaviour, IPlayerDialogListene
         p.InputReader.EnablePlayer();
         p.InputReader.DisableDialogUI();
 
-        DialogParent.SetActive(false);
-        DialogOptionsParent.SetActive(false);
+        dialogParent.SetActive(false);
+        dialogOptionsParent.SetActive(false);
     }
 }

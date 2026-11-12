@@ -286,10 +286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d07bfaec41d33446827841e41b91abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogListenerPlayerComponent
-  DialogParent: {fileID: 3305414348517750708}
-  DialogOptionsParent: {fileID: 3980066985008484732}
-  DialogOptionPrefab: {fileID: 4029633139774727761, guid: ba847721fa45bdd4a8df1d700fba046f, type: 3}
-  DialogText: {fileID: 5794078711984389547}
+  dialogParent: {fileID: 3305414348517750708}
+  dialogOptionsParent: {fileID: 3980066985008484732}
+  dialogOptionPrefab: {fileID: 4029633139774727761, guid: ba847721fa45bdd4a8df1d700fba046f, type: 3}
+  dialogText: {fileID: 5794078711984389547}
 --- !u!1 &3305414348517750708
 GameObject:
   m_ObjectHideFlags: 0
