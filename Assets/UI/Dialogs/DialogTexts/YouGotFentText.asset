@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a0387d73861f84c919f053a0b1ed19, type: 3}
-  m_Name: Test 1
+  m_Name: YouGotFentText
   m_EditorClassIdentifier: Assembly-CSharp::DialogData
   Message:
-    Speaker: Me
-    Text: 67676676767
+    Speaker: Stranger with fent
+    Text: here tou got
   Options: []

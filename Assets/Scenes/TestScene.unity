@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_Name
-      value: DialogTrigger (3)
+      value: FightDialogTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_IsActive
@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_Name
-      value: DialogTrigger (2)
+      value: YouDidntWantFentDialogTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_IsActive
@@ -1022,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_Name
-      value: DialogTrigger (1)
+      value: YouGotFentTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_IsActive
@@ -1246,7 +1246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7236106948302536130, guid: d886b958f30abe94dbb45072b1078562, type: 3}
       propertyPath: m_Name
-      value: DialogTrigger
+      value: MainDialogTrigger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
