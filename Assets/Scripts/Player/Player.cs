@@ -3,11 +3,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerBodyComponent))]
 [RequireComponent(typeof(PlayerFPSMovementComponent))]
+[RequireComponent(typeof(DialogListenerPlayerComponent))]
 public class Player : MonoBehaviour
 {
 
     public IPlayerBody PlayerBody { get; private set; }
     public IPlayerMovement PlayerMovement { get; private set; }
+    public IPlayerDialogListener PlayerDialogListener { get; private set; }
 
     public IInputReader InputReader { get; private set; }
 
@@ -19,28 +21,20 @@ public class Player : MonoBehaviour
         InputReader = new InputReader();
         InputReader.EnablePlayer();
         InputReader.DisableUI();
+        InputReader.DisableDialogUI();
 
 
         PlayerBody = GetComponent<PlayerBodyComponent>();
         PlayerMovement = GetComponent<PlayerFPSMovementComponent>();
+        PlayerDialogListener = GetComponent<DialogListenerPlayerComponent>();
 
         Debug.Assert(PlayerBody != null, "you fucked up (player dont have PlayerBody)");
         Debug.Assert(PlayerMovement != null, "you fucked up (player dont have PlayerMovement)");
+        Debug.Assert(PlayerMovement != null, "you fucked up (player dont have PlayerDialogListener)");
 
         PlayerBody.PlayerComponent.Init(this);
         PlayerMovement.PlayerComponent.Init(this);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PlayerDialogListener.Init(this);
     }
 }
 

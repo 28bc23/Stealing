@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IPlayerMovement : IPlayerComponent
 {
-
+    public void StopPlayer();
 }
 
 [RequireComponent(typeof(Rigidbody))]
@@ -60,7 +60,7 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         #region Movement
         if (player.InputReader.MoveDelta == Vector2.zero)
         {
-            rb.linearVelocity = Vector3.zero;
+            StopPlayer();
             return;
         }
 
@@ -83,4 +83,6 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         }
         #endregion
     }
+
+    public void StopPlayer() => rb.linearVelocity = Vector3.zero;
 }
