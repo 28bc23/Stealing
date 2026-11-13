@@ -32,7 +32,22 @@ public class DialogTrigger : MonoBehaviour
 
     public void NextDialog()
     {
-        if (nextDialogs.Count > 0) nextDialogs[0]?.gameObject.SetActive(true);
+        if (nextDialogs.Count > 0)
+        {
+            for (int i = 0; i < nextDialogs.Count; i++)
+            {
+                if (i == 0)
+                {
+                    nextDialogs[i]?.gameObject.SetActive(true);
+                    if (destroyUnselectedOptions) continue;
+                    
+                    break;
+                }
+
+                if (nextDialogs[i] != null)
+                    Destroy(nextDialogs[i].gameObject);
+            }
+        }
         Destroy(gameObject);
     }
 
