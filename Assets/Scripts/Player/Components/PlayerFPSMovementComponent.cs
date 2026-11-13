@@ -83,4 +83,9 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         }
         #endregion
     }
+
+    public void Destroy()
+    {
+        //NOOP
+    }
 }

@@ -22,6 +22,11 @@ public class PlayerBodyComponent : MonoBehaviour, IPlayerBody
 
     public IPlayerComponent PlayerComponent => this;
 
+    public void Destroy()
+    {
+       // NOOP
+    }
+
     public void Init(Player player)
     {
         this.player = player;

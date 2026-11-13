@@ -47,6 +47,13 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        PlayerBody.PlayerComponent.Destroy();
+        PlayerMovement.PlayerComponent.Destroy();
+        PlayerInteraction.PlayerComponent.Destroy();
+    }
 }
 
 
@@ -55,4 +62,5 @@ public interface IPlayerComponent
     public IPlayerComponent PlayerComponent { get; }
 
     public void Init(Player player);
+    public void Destroy();
 }
