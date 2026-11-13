@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 7805537385771027460}
   - component: {fileID: 4799519553589226351}
   - component: {fileID: 1720887824403760825}
+  - component: {fileID: 5357354891972427715}
+  - component: {fileID: 8193638134983478457}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -271,6 +273,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac899546dc938c14986be8b74b5a5ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!114 &5357354891972427715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004324032166714026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa54be00f7fd95438158a3049958061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionComponent
+  InteractionDistance: 2
+--- !u!114 &8193638134983478457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004324032166714026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa54be00f7fd95438158a3049958061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionComponent
+  InteractionDistance: 3
 --- !u!1 &8281022896524947278
 GameObject:
   m_ObjectHideFlags: 0

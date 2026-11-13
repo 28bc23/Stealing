@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 253025779}
   - component: {fileID: 253025778}
   - component: {fileID: 253025777}
+  - component: {fileID: 253025780}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -288,6 +289,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253025775}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &253025780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253025775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43a03def69e904439ac72f23fe12ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupComponent
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +602,7 @@ GameObject:
   - component: {fileID: 1075102624}
   - component: {fileID: 1075102623}
   - component: {fileID: 1075102622}
+  - component: {fileID: 1075102625}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -689,6 +703,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075102620}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1075102625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075102620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43a03def69e904439ac72f23fe12ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupComponent
 --- !u!1 &1102764801
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +762,7 @@ GameObject:
   - component: {fileID: 1958149929}
   - component: {fileID: 1958149928}
   - component: {fileID: 1958149927}
+  - component: {fileID: 1958149930}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -836,6 +863,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958149925}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1958149930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958149925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43a03def69e904439ac72f23fe12ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupComponent
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
