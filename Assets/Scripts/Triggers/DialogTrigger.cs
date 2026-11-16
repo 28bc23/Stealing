@@ -9,7 +9,7 @@ public class DialogTrigger : MonoBehaviour
     public List<DialogData> dialogs { get; private set; }
 
     [SerializeField]
-    private List<DialogTrigger> nextDialogs = new List<DialogTrigger>();
+    private List<GameObject> nextDialogs = new();
 
     [SerializeField]
     private bool destroyUnselectedOptions = true;
@@ -26,8 +26,6 @@ public class DialogTrigger : MonoBehaviour
         {
             Debug.LogWarning($"Dialog trigger ({gameObject.name}) doesnt have same amount of next dialogs as potions, but it can be right if you know what you are doing, idk.");
         }
-
-        GetComponent<Collider>().isTrigger = true;
     }
 
     public void NextDialog()
@@ -38,7 +36,11 @@ public class DialogTrigger : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    nextDialogs[i]?.gameObject.SetActive(true);
+                    if (nextDialogs[i] != null)
+                    {
+                        nextDialogs[i].SetActive(true);
+                    }
+
                     if (destroyUnselectedOptions) continue;
                     
                     break;
@@ -75,8 +77,14 @@ public class DialogTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("sdsds");
         if (!other.TryGetComponent(out IDialogListener listener)) return;
+
+        listener.TriggeredDialog(this);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.TryGetComponent(out IDialogListener listener)) return;
 
         listener.TriggeredDialog(this);
     }

@@ -20,6 +20,8 @@ public class InputReader : IInputReader
     public event Action OnOptionDownEvent;
     #endregion
 
+    public event Action OnInteractEvent;
+
     public InputReader()
     {
         inputActions = new InputSystem_Actions();
@@ -46,6 +48,8 @@ public class InputReader : IInputReader
 
         inputActions.Player.Look.performed += OnLookHandle;
         inputActions.Player.Look.canceled += OnLookHandle;
+
+        inputActions.Player.Interact.performed += OnInteractHandle;
         #endregion
 
         #region DialogUI
@@ -66,6 +70,8 @@ public class InputReader : IInputReader
 
         inputActions.Player.Look.performed -= OnLookHandle;
         inputActions.Player.Look.canceled -= OnLookHandle;
+
+        inputActions.Player.Interact.performed -= OnInteractHandle;
         #endregion
 
         #region DialogUI
@@ -74,11 +80,12 @@ public class InputReader : IInputReader
         inputActions.DialogUI.optionDown.performed -= OnOptionDownHandle;
         #endregion
     }
-
+        
     #region Player
     private void OnLookHandle(InputAction.CallbackContext context) => CursorDelta = context.ReadValue<Vector2>();
     private void OnSprintHandle(InputAction.CallbackContext context) => IsSprinting = context.ReadValueAsButton();
     void OnMoveHandle(InputAction.CallbackContext context) => MoveDelta = context.ReadValue<Vector2>();
+    private void OnInteractHandle(InputAction.CallbackContext context) => OnInteractEvent?.Invoke();
     #endregion
 
     #region DialogUI
@@ -103,6 +110,8 @@ public interface IInputReader
     public event Action OnOptionUpEvent;
     public event Action OnOptionDownEvent;
     #endregion
+
+    public event Action OnInteractEvent;
 
     public void EnablePlayer();
     public void DisablePlayer();

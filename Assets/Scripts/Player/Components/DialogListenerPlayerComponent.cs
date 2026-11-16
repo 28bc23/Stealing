@@ -144,4 +144,9 @@ public class DialogListenerPlayerComponent : MonoBehaviour, IPlayerDialogListene
         dialogParent.SetActive(false);
         dialogOptionsParent.SetActive(false);
     }
+
+    public void Destroy()
+    {
+        //NOOP
+    }
 }

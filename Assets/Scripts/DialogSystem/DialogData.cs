@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-[CreateAssetMenu(fileName = "DialogData", menuName = "DialogSystem")]
+[CreateAssetMenu(fileName = "DialogData", menuName = "DialogSystem/DialogData")]
 public class DialogData : ScriptableObject
 {
     public Message Message = new("null", "null");

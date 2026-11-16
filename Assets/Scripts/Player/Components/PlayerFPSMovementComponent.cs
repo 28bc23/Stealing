@@ -32,7 +32,9 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
     public IPlayerComponent PlayerComponent => this;
 
+    [SerializeField]
     float cameraX;
+    [SerializeField]
     float cameraY;
 
     public void Init(Player player)
@@ -83,6 +85,9 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
         }
         #endregion
     }
-
+    public void Destroy()
+    {
+        //NOOP
+    }
     public void StopPlayer() => rb.linearVelocity = Vector3.zero;
 }
