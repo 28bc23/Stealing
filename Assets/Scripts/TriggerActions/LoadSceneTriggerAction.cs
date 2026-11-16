@@ -26,6 +26,7 @@ public class LoadSceneTriggerAction : ScriptableObject
         }
 
         LoadingScreenUI loadingUI = FindAnyObjectByType<LoadingScreenUI>(FindObjectsInactive.Include);
+        if (loadingUI == null) Debug.Log("`LoadingScreenUI` component wasnt found in scene so no loading screen will be enabled");
 
         loadingUI?.Enable();
 

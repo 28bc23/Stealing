@@ -32,7 +32,9 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
     public IPlayerComponent PlayerComponent => this;
 
+    [SerializeField]
     float cameraX;
+    [SerializeField]
     float cameraY;
 
     public void Init(Player player)

@@ -15,7 +15,24 @@ public class LoadingScreenUI : MonoBehaviour
 
     public void Enable()
     {
-        if(loadingSlider != null)
+        Player p = FindAnyObjectByType<Player>(FindObjectsInactive.Include);
+        if(p != null)
+        {
+            p.InputReader.DisablePlayer();
+            p.InputReader.DisableDialogUI();
+            p.PlayerMovement.StopPlayer();
+
+            p.InputReader.EnableUI();
+        }
+        else
+        {
+            Debug.LogWarning("Player wasnt found");
+        }
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+
+        if (loadingSlider != null)
         {
             loadingSlider.interactable = false;
             loadingSlider.minValue = 0;
