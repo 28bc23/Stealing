@@ -1010,6 +1010,77 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DialogUI",
+            "id": "68f36cea-cc1f-4e0e-9b9b-5bb5bdab647b",
+            "actions": [
+                {
+                    "name": "next",
+                    "type": "Button",
+                    "id": "1cd962ee-25a9-4e30-be13-ce4317beb482",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "optionUP",
+                    "type": "Button",
+                    "id": "c2d0ee4e-e491-466a-a223-0d5f3476952b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "optionDown",
+                    "type": "Button",
+                    "id": "07ca4d85-e38d-4796-87c1-cead66d3e46e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c5d2be26-90b2-4870-b1e3-edc982c529e7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a18c315-c84f-46a9-ac55-9e32eefc2fad",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "optionUP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93803e5a-682c-4cf6-a2b0-ce0f83cdc448",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "optionDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
