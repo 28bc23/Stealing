@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a0387d73861f84c919f053a0b1ed19, type: 3}
+  m_Name: DialogTrigger
+  m_EditorClassIdentifier: Assembly-CSharp::DialogData
+  Message:
+    Speaker: Silas Thorn
+    Text: Listen 'ere, young 'un, this is yer very first lay. Yer'll scuttle off to the cove in the park and nick somethin' worth a mag. Then hop back to me, and I'll think on whether yer fit to join the mob.
+  Options: []
