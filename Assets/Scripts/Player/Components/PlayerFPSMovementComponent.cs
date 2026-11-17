@@ -47,18 +47,7 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
   
     void FixedUpdate()
     {
-        #region Camera
-
-        cameraX -= player.InputReader.CursorDelta.y * sensitivityY;
-        cameraY += player.InputReader.CursorDelta.x * sensitivityX;
-
-        cameraX = Mathf.Clamp(cameraX, minXAngle, maxXAngle);
-
-        player.PlayerBody.CameraTransform.localRotation = Quaternion.Euler(cameraX, cameraY, 0);
-
-        player.PlayerBody.Orientation.localRotation = Quaternion.Euler(0, cameraY, 0);
-        #endregion
-
+ 
         #region Movement
         if (player.InputReader.MoveDelta == Vector2.zero)
         {
@@ -83,6 +72,20 @@ public class PlayerFPSMovementComponent : MonoBehaviour, IPlayerMovement
 
             rb.linearVelocity = limitedVelocity;
         }
+        #endregion
+    }
+    private void LateUpdate()
+    {
+        #region Camera
+
+        cameraX -= player.InputReader.CursorDelta.y * sensitivityY;
+        cameraY += player.InputReader.CursorDelta.x * sensitivityX;
+
+        cameraX = Mathf.Clamp(cameraX, minXAngle, maxXAngle);
+
+        player.PlayerBody.CameraTransform.localRotation = Quaternion.Euler(cameraX, cameraY, 0);
+
+        player.PlayerBody.Orientation.localRotation = Quaternion.Euler(0, cameraY, 0);
         #endregion
     }
     public void Destroy()

@@ -494,7 +494,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 2.5
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1630,7 +1630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1455289932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   onCollideEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: e5e9b685f41118c46bd0c343525de586, type: 2}
+      - m_Target: {fileID: 11400000, guid: c135e96fcaec807498c15db189de4f10, type: 2}
         m_TargetAssemblyTypeName: LoadSceneTriggerAction, Assembly-CSharp
         m_MethodName: StartLoadSceneAsync
         m_Mode: 1
@@ -1967,11 +1967,6 @@ Transform:
   - {fileID: 1959640342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1914507744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 83e321e8c00f728459e6e26cdd304d47, type: 3}
-  m_PrefabInstance: {fileID: 415052113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1914507745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83e321e8c00f728459e6e26cdd304d47, type: 3}
@@ -2009,7 +2004,7 @@ MonoBehaviour:
   onCollideEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1914507744}
+      - m_Target: {fileID: 1455289931}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2019,7 +2014,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   goal: 10
 --- !u!4 &1915258205
@@ -2294,7 +2289,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 3
+          m_FloatArgument: 1
           m_StringArgument: pigger
           m_BoolArgument: 0
         m_CallState: 2
