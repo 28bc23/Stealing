@@ -739,8 +739,8 @@ MonoBehaviour:
   speedMultuplayer: 1000
   walkSpeedLimit: 2
   sprintSpeedLimit: 4
-  sensitivityX: 0.2
-  sensitivityY: 0.2
+  sensitivityX: 0.51
+  sensitivityY: 0.47
   maxXAngle: 90
   minXAngle: -90
   cameraX: 0
