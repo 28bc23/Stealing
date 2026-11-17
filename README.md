@@ -1,5 +1,6 @@
-# Controlls
-- movement - WASD, left shift for sprint
-- E - pickup
-- space - next dialog/choosing dialog option
-- arrow up, arrow down - switching between dialog options
+# Controls:
+- Movement: WASD
+- Sprint: Left shift
+- Pickup: E
+- Next dialog/select dialog option: space
+- Change dialog option: arrow up, arrow down
